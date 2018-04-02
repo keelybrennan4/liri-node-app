@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/keelybrennan4/liri-node-app/issues"
   },
-  "homepage": "https://github.com/keelybrennan4/liri-node-app#readme"
+  "homepage": "https://github.com/keelybrennan4/liri-node-app#readme",
+  "dependencies": {
+    "request": "^2.85.0"
+  }
 }
