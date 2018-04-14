@@ -27,7 +27,6 @@ switch (userInput) {
   case "do-what-it-says":
     randomTxtFunc();
     break;
-
   default: 
   console.log("Invalid entry. Please type any of the following commands: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
 }
