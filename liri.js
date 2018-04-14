@@ -27,8 +27,9 @@ switch (userInput) {
   case "do-what-it-says":
     randomTxtFunc();
     break;
+
   default: 
-    console.log("Invalid entry. Please type any of the following commands: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
+  console.log("Invalid entry. Please type any of the following commands: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
 }
 
 //-------------------function for my-tweets----------------// 
@@ -46,7 +47,7 @@ function twitterFunc(){
           console.log("Created at: " + tweets[i].created_at);
           console.log("------------------------------");
         }
-        
+
       }else {
         console.log(error);
       }
@@ -133,6 +134,29 @@ function movieFunc(){
   }
 
 //----------------function for do-what-it-says---------------//
-//function randomTxtFunc(){
-//}
-};
+function randomTxtFunc(){
+
+  fs.readFile("random.txt", "utf8", function (err, data) {
+    var dataArr = data.split(", ");
+    
+    userInput = dataArr[0];
+
+    if (dataArr.length > 0) {
+      randomtxt = dataArr[1];
+    }
+
+    switch (userInput) {
+      case "my-tweets":
+          twitterFunc();
+          break;
+      case "spotify-this-song":
+          spotifyFunc();
+          break;
+      case "movie-this":
+          movieFunc();
+          break;
+      }
+  });
+}
+
+}

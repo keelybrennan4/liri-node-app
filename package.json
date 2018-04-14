@@ -19,6 +19,7 @@
   "homepage": "https://github.com/keelybrennan4/liri-node-app#readme",
   "dependencies": {
     "dotenv": "^5.0.1",
+    "file-system": "^2.2.2",
     "i": "^0.3.6",
     "node-spotify-api": "^1.0.7",
     "npm": "^5.8.0",
