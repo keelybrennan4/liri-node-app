@@ -46,11 +46,10 @@ function twitterFunc(){
           console.log("Created at: " + tweets[i].created_at);
           console.log("------------------------------");
         }
-
+        
       }else {
         console.log(error);
       }
-
   });
 
 }
@@ -58,18 +57,37 @@ function twitterFunc(){
 //---------------function for spotify-this-song-------------// 
 function spotifyFunc(){
   var spotify = new Spotify(keys.spotify);
-
-
-
-
-
-
-}
-
+  var song = randomtxt;
+  
+    if (song == null){
+      song = process.argv[3];
+    
+      //if song name is more than one word 
+      for (var i = 4; i < process.argv.length; i++) {
+        song = song + " " + process.argv[i];
+        }
+    }
+    
+    if (song == null){
+      console.log("Here's a good song!");
+      song = "The Sign";
+    }
+    
+    spotify.search({ type: "track", query: song }, function(err, data) {
+      if (err) {
+          console.log(err);
+          return;
+      }
+        console.log("-----------------------");
+        console.log("Artist: " + data.tracks.items[0].artists[0].name);
+        console.log("Song Name: " + data.tracks.items[0].name);
+        console.log("Preview Link: " + data.tracks.items[0].preview_url);
+        console.log("Album: " + data.tracks.items[0].album.name);
+      });
+  }
 
 //--------------function for movie-this-------------------// 
 function movieFunc(){
-
   var movie = randomtxt;
 
   if (movie == null){
