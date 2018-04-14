@@ -7,11 +7,11 @@ var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require("request");
 
-//variable to feed to randomTxtFunc
-var randomtxt;
-
 //variable to store user input from command line
 var userInput = process.argv[2];
+
+//variable for randomTxtFunc 
+var randomtxt;
 
 //switch case for 4 command line arguments
 switch (userInput) {
@@ -27,17 +27,18 @@ switch (userInput) {
   case "do-what-it-says":
     randomTxtFunc();
     break;
+
   default: 
   console.log("Invalid entry. Please type any of the following commands: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
-}
+};
 
 //-------------------function for my-tweets----------------// 
 function twitterFunc(){
   var client = new Twitter(keys.twitter);
 
   var params = {screen_name: "keelybrennan333"};
-    client.get('statuses/user_timeline', params, function(err, tweets, response) {
-      if (!err) {
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+      if (!error) {
         console.log("here are my recent tweets");
         console.log("------------------------------");
 
@@ -47,8 +48,8 @@ function twitterFunc(){
           console.log("------------------------------");
         }
 
-      }else {
-        console.log(err);
+      } else {
+        console.log(error);
       }
   });
 
@@ -73,9 +74,9 @@ function spotifyFunc(){
       song = "The Sign";
     }
     
-    spotify.search({ type: "track", query: song }, function(err, data) {
-      if (err) {
-          console.log(err);
+    spotify.search({ type: "track", query: song }, function(error, data) {
+      if (error) {
+          console.log(error);
           return;
       }
         console.log("-----------------------");
@@ -131,11 +132,16 @@ function movieFunc(){
     });
     
   }
-
+}
 //----------------function for do-what-it-says---------------//
 function randomTxtFunc(){
 
-  fs.readFile("random.txt", "utf8", function (err, data) {
+  fs.readFile("random.txt", "utf8", function (error, data) {
+      if (error){
+        console.log(error);
+      }
+
+    //split commas so it's easier to read 
     var dataArr = data.split(", ");
     
     userInput = dataArr[0];
@@ -156,6 +162,4 @@ function randomTxtFunc(){
           break;
       }
   });
-}
-
-}
+};
