@@ -5,7 +5,7 @@ var keys = require("./keys.js");
 var fs = require("fs");
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
-
+var request = require("request");
 
 //variable to feed to randomTxtFunc
 var randomtxt;
@@ -27,25 +27,49 @@ switch (userInput) {
   case "do-what-it-says":
     randomTxtFunc();
     break;
+  default: 
+    console.log("Invalid entry. Please type any of the following commands: my-tweets, spotify-this-song, movie-this, or do-what-it-says");
 }
 
-//function for my-tweets
-//function twitterFunc(){
-  //var client = new Twitter(keys.twitter);
+//-------------------function for my-tweets----------------// 
+function twitterFunc(){
+  var client = new Twitter(keys.twitter);
 
-//}
+  var params = {screen_name: "keelybrennan333"};
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+      if (!error) {
+        console.log("here are my recent tweets");
+        console.log("------------------------------");
+
+        for(i = 0; i < 20; i++){
+          console.log(tweets[i].text);
+          console.log("Created at: " + tweets[i].created_at);
+          console.log("------------------------------");
+        }
+
+      }else {
+        console.log(error);
+      }
+
+  });
+
+}
+
+//---------------function for spotify-this-song-------------// 
+function spotifyFunc(){
+  var spotify = new Spotify(keys.spotify);
 
 
-//function for spotify-this-song
-//function spotifyFunc(){
-  //var spotify = new Spotify(keys.spotify);
-//}
 
 
 
-//function for movie-this
+
+}
+
+
+//--------------function for movie-this-------------------// 
 function movieFunc(){
-  var request = require("request");
+
   var movie = randomtxt;
 
   if (movie == null){
@@ -85,12 +109,12 @@ function movieFunc(){
       }else {
         console.log(error);
       }
-      
+
     });
     
   }
 
-  //function for do-what-it-says 
+//----------------function for do-what-it-says---------------//
 //function randomTxtFunc(){
 //}
 };
