@@ -37,8 +37,8 @@ function twitterFunc(){
   var client = new Twitter(keys.twitter);
 
   var params = {screen_name: "keelybrennan333"};
-    client.get('statuses/user_timeline', params, function(error, tweets, response) {
-      if (!error) {
+    client.get('statuses/user_timeline', params, function(err, tweets, response) {
+      if (!err) {
         console.log("here are my recent tweets");
         console.log("------------------------------");
 
@@ -49,7 +49,7 @@ function twitterFunc(){
         }
 
       }else {
-        console.log(error);
+        console.log(err);
       }
   });
 
